@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: geth-dev-miner-1
+  name: geth-dev-miner-1
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: geth-dev-miner-1
+    spec:
+      containers:
+      - env:
+        - name: address
+          value: 0x8cc5a1a0802db41db826c2fcb72423744338dcb0
+        - name: bootnodeId
+          value: 76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c
+        - name: bootnodeIp
+          value: 172.25.0.101
+        image: geth-dev-miner-1
+        name: geth-miner-1
+        resources: {}
+        volumeMounts:
+        - mountPath: /root/.ethash
+          name: eth-data-1
+      hostname: geth-dev-miner-1
+      restartPolicy: Always
+      volumes:
+      - name: eth-data-1
+        persistentVolumeClaim:
+          claimName: eth-data-1
+status: {}

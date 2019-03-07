@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: geth-dev-swarm-2
+  name: geth-dev-swarm-2
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: geth-dev-swarm-2
+    spec:
+      containers:
+      - env:
+        - name: address
+          value: 3590aca93338b0721966a8d0c96ebf2c4c87c544
+        - name: bootnodeId
+          value: 76a8171707eca17647a47ca99ffd348927dfa60102792ea349a25d5192e61855be83b786e376276a306afcceea4ffd1c9c77e4370b417efc39f328a0d068004c
+        - name: bootnodeIp
+          value: 172.25.0.101
+        image: geth-dev-swarm-2
+        name: geth-swarm-2
+        ports:
+        - containerPort: 8500
+        - containerPort: 30399
+          protocol: UDP
+        resources: {}
+        volumeMounts:
+        - mountPath: /root/.ethash
+          name: eth-data-5
+      hostname: geth-dev-miner-3
+      restartPolicy: Always
+      volumes:
+      - name: eth-data-5
+        persistentVolumeClaim:
+          claimName: eth-data-5
+status: {}

@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: geth-explorer
+  name: geth-explorer
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: geth-explorer
+    spec:
+      containers:
+      - image: geth-explorer
+        name: geth-explorer
+        ports:
+        - containerPort: 8080
+        resources: {}
+      hostname: geth-explorer
+      restartPolicy: Always
+status: {}

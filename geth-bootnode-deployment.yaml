@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: geth-bootnode
+  name: geth-bootnode
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: geth-bootnode
+    spec:
+      containers:
+      - env:
+        - name: nodekeyhex
+          value: 08f0e1dee5c1b4645f3331a566009e41a4514b6cd28656d63d0449ecf812812b
+        image: geth-bootnode
+        name: geth-bootnode
+        ports:
+        - containerPort: 30301
+          protocol: UDP
+        resources: {}
+      hostname: geth-bootnode
+      restartPolicy: Always
+status: {}

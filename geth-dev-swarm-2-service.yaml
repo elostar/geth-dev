@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: geth-dev-swarm-2
+  name: geth-dev-swarm-2
+spec:
+  ports:
+  - name: "8501"
+    port: 8501
+    targetPort: 8500
+  - name: "30340"
+    port: 30340
+    protocol: UDP
+    targetPort: 30399
+  selector:
+    io.kompose.service: geth-dev-swarm-2
+status:
+  loadBalancer: {}

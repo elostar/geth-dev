@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.18.0 (06a2e56)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: geth-bootnode
+  name: geth-bootnode
+spec:
+  ports:
+  - name: "30301"
+    port: 30301
+    protocol: UDP
+    targetPort: 30301
+  selector:
+    io.kompose.service: geth-bootnode
+status:
+  loadBalancer: {}
